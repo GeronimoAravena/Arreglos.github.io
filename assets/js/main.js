@@ -2,7 +2,7 @@ const btnAddNew = document.querySelector('#newTask');
 const task = document.querySelector('#newTask');
 const tbodyTasks = document.querySelector('#tasks');
 const tasksList = [];
-const totalTask = document.querySelector('#totalTasks');
+const totalTask = document.querySelector('#totalTask');
 const taskReady = document.querySelector('#taskReady');
 
 
@@ -33,7 +33,7 @@ const updateList = () => {
     for (let task of tasksList) {
         if (task.status){
             countTaskReady++;
-        } 
+        }  
         row +=`
         <tr>
         <td>${task.id}</td>
@@ -49,7 +49,6 @@ const updateList = () => {
 
     totalTask.innerHTML = tasksList.length;
     taskReady.innerHTML = countTaskReady
-    
 }
 
 const updateStatus = (taskId) => {

@@ -16,12 +16,16 @@
     <!-- Titulo -->
     <title>To-Do-List</title>
 </head>
+<body>
 <div class="container">
     <h1>To-Do-List</h1>
     <hr/>
     <div>
         <label> Nueva Tarea</label><br/>
+        
         <input type="text" class="form-control" id="newTask">
+
+        <p>Para ingresar la tarea presione <span id="bold">Enter</span></p>
     </div>
     <div class="right">
         <span id="taskReady">/</span><span id="totalTask"></span>
@@ -38,7 +42,7 @@
         </thead>
         <tbody id="tasks"></tbody>
     </table>
-</div>
+
 <script src="assets/js/main.js"></script>
 </div>
 </body>
