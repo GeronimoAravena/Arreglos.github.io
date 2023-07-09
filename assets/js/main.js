@@ -46,6 +46,9 @@ const updateList = () => {
     }
     task.value = "";
     tbodyTasks.innerHTML = row;
+
+    totalTask.innerHTML = tasksList.length;
+    taskReady.innerHTML = countTaskReady
     
 }
 
