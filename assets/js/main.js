@@ -1,10 +1,12 @@
-const btnAgregar = document.querySelector('#newTask');
+const btnAddNew = document.querySelector('#newTask');
 const task = document.querySelector('#newTask');
 const tbodyTasks = document.querySelector('#tasks');
 const tasksList = [];
+const totalTask = document.querySelector('#totalTasks');
+const taskReady = document.querySelector('#taskReady');
 
 
-btnAgregar.addEventListener('keypress', function(e) {
+btnAddNew.addEventListener('keypress', function(e) {
 if(e.keyCode === 13){
     addTask();
 }
@@ -27,17 +29,37 @@ const addTask = () => {
 }
 
 const updateList = () => {
-    let html = '';
+    let row = '', countTaskReady = 0;
     for (let task of tasksList) {
-        html +=
-        `<tr>
+        if (task.status){
+            countTaskReady++;
+        } 
+        row +=`
+        <tr>
         <td>${task.id}</td>
         <td>${task.name}</td>
-        <td>${task.status ?'realizada': 'pendiente'}</td>
-        <td><button class="btn btn-danger">Eliminar</button></td>
-        </tr>`
-        ;
+        <td class="text-right">
+        <button onclick="updateStatus(${task.id})" class="btn btn-${task.status ?'success' : 'warning'}">${task.status ? 'Realizada' : 'Pendiente'}</button>
+        <button onclick= "deleteTask(${task.id})" class="btn btn-danger" id="btnEliminar" >Eliminar</button></td>
+        </tr>
+        `;
     }
     task.value = "";
-    tbodyTasks.innerHTML = html;
+    tbodyTasks.innerHTML = row;
+    
+}
+
+const updateStatus = (taskId) => {
+    const index = tasksList.findIndex(task => task.id === taskId);
+    tasksList[index].status = !tasksList[index].status;
+    updateList();  
+}
+
+const deleteTask = (taskId) => {
+    const confirmation = confirm('¿Esta seguro de eliminar esta tarea?');
+    if (confirmation) { 
+        const index = tasksList.findIndex (task => task.id === taskId);
+        tasksList.splice(index, 1);
+        updateList();
+    }
 }
